@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web Calculator</title>
+    <style>
+        body{
+    background-color: black;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    padding-bottom: 20px;
+}
+.header{
+    box-sizing: border-box;
+    color: white;
+    text-align: center;
+    font-family: 'Times New Roman', Times, serif;
+}
+.calculator{
+    max-width: 500px;
+    width: 100%;
+    max-height: 70vh;
+    height: 100%;
+    background-color: grey;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 20px;
+    text-align: center;
+    box-sizing: border-box;
+    padding: 10px;
+}
+
+.display input{
+    box-sizing: border-box;
+    width: 100%;
+    height: 10vh;
+    font-size: 1.4em;
+    border: none;
+    margin-bottom: 5px;
+    color: black;
+}
+.keyboard{
+    text-align: center;
+    width: 100%;
+    box-sizing: border-box;
+}
+.keyboard div{
+    width: 100%;
+    box-sizing: border-box;
+    padding-top: 5px;
+    height: 11vh;
+    display: flex;
+}
+.keyboard div button{
+    box-sizing: border-box;
+    width: 25%;
+    height: 100%;
+    font-size: 1.2em;
+    border: none;
+    outline: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.keyboard div button:hover{
+    opacity: 0.7;
+}
+.keyboard button:nth-child(1){
+    box-sizing: border-box;
+    margin-right: 5px;
+}
+.keyboard button:nth-child(2){
+    box-sizing: border-box;
+    margin-right: 5px;
+}
+.keyboard button:nth-child(3){
+    box-sizing: border-box;
+    margin-right: 5px;
+}
+.keyboard div:nth-child(1) button:nth-child(1){
+    background-color: red;
+}
+.keyboard div:nth-child(1) button:nth-child(2){
+    background-color: red;
+}
+.keyboard div:nth-child(1) button:nth-child(3){
+    background-color: blue;
+}
+.keyboard button:nth-child(4){
+    background-color: blue;
+} 
+.keyboard div:nth-child(5) button{
+    background-color: blue;
+}
+.keyboard div:nth-child(5) button:nth-child(1){
+    background-color: white;
+}
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Web Calculator</h1>
+        <h2>By Lutfullo</h2>
+    </div>
+    <hr>
+     <div class="calculator" id="calculator" name="calculator">
+         <div class="display" id="display" name="display">
+            <input type="text" id="summ" name="summ" disabled placeholder="0" value="">
+         </div>
+         <div class="keyboard" id="keyboard" >
+                <div>
+                    <button value="">C</button>
+                    <button value="del">DEL</button>
+                    <button value="sqrt" >sqrt</button>
+                    <button value="sqr" >sqr</button>
+                </div>
+                <div>
+                    <button value="7">7</button>
+                    <button value="8">8</button>
+                    <button value="9">9</button>
+                    <button value="*">x</button>
+                </div>
+                <div>
+                    <button value="4">4</button>
+                    <button value="5">5</button>
+                    <button value="6">6</button>
+                    <button value="/" >/</button>
+                </div>
+                <div>
+                    <button value="1">1</button>
+                    <button value="2">2</button>
+                    <button value="3">3</button>
+                    <button value="-" >-</button>
+                </div>
+                <div>
+                    <button value="0" >0</button>
+                    <button value="." >.</button>
+                    <button value="=" >=</button>
+                    <button value="+" >+</button>
+                </div>
+         </div>
+     </div>
+     <script>
+         
+var qiymat='';
+var qiymat1='';
+var qiymat2=''; 
+let shart=0;
+let amal;
+let equal=true;
+const buttons=document.querySelectorAll('button');
+
+buttons.forEach(button=>{
+button.addEventListener('click',()=>{
+    if(button.value==''){
+        document.getElementById('summ').value='';
+    }
+    else if(button.value=='del'){
+        var x=document.getElementById('summ').value.split("");
+
+        var ansver=x.pop();
+       document.getElementById('summ').value='';
+    
+       for(let i=0; i<x.length; i++){
+        document.getElementById('summ').value+=x[i]; }
+    }
+    else if(button.value=='sqrt'){
+        var a=Math.sqrt(document.getElementById('summ').value);
+        document.getElementById('summ').value=a;
+    }
+    else if(button.value=='sqr'){
+        var b=Math.pow((document.getElementById('summ').value),2);
+    document.getElementById('summ').value=b;
+    }
+    else if(button.value=='*'||button.value=='/'||button.value=='+'||button.value=='-'){
+        if(equal==false){ equal=true; } 
+        amal=button.value;
+        qiymat1=document.getElementById('summ').value;
+        document.getElementById('summ').value='';
+    }
+    else if(button.value=='.'){
+        for(let i=0; i<document.getElementById('summ').value.length; i++){
+            if(document.getElementById('summ').value.charAt(i)=='.'){shart++;}
+        }
+        if(document.getElementById('summ').value==''|| shart>=1){
+        }
+        else{
+        document.getElementById('summ').value+='.';
+    }
+    }
+    else if(button.value=='='){
+        if(amal==undefined || equal==false){}
+        else{
+        qiymat2=document.getElementById('summ').value;  
+
+    if(amal==='*'){document.getElementById('summ').value=qiymat1*qiymat2;  }
+
+    else if(amal==='+'){document.getElementById('summ').value=parseFloat(qiymat1)+parseFloat(qiymat2); }
+
+    else if(amal==='-'){document.getElementById('summ').value=qiymat1-qiymat2; }
+    else if(amal=='/'){document.getElementById('summ').value=qiymat1/qiymat2; }}
+    equal=false;
+    }
+    else{
+    if(document.getElementById('summ').value=='0'){
+        document.getElementById('summ').value='';
+        document.getElementById('summ').value+=button.value;
+    }
+    else{ document.getElementById('summ').value+=button.value;}
+     }
+})
+});
+
+     </script>
+</body>
+</html>
